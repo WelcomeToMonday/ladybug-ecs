@@ -9,6 +9,8 @@ namespace Ladybug.ECS
 {
 	public class EntitySystem
 	{
+		public ResourceCatalog ResourceCatalog { get; set; }
+
 		private ulong _nextEntityID = 0;
 		private Dictionary<ulong, Entity> _entityList = new Dictionary<ulong, Entity>();
 		private Dictionary<Type, List<Component>> _componentList;
@@ -19,6 +21,11 @@ namespace Ladybug.ECS
 		public EntitySystem(GraphicsDevice graphicsDevice)
 		{
 			GraphicsDevice = graphicsDevice;
+		}
+
+		public EntitySystem(GraphicsDevice graphicsDevice, ResourceCatalog resourceCatalog) : this(graphicsDevice)
+		{
+			ResourceCatalog = resourceCatalog;
 		}
 
 		public GraphicsDevice GraphicsDevice { get; set; }
