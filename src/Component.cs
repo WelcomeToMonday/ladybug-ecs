@@ -15,6 +15,10 @@ namespace Ladybug.ECS
 
 		public Entity Entity { get; private set; }
 
+		public EntitySystem System { get => Entity.System; }
+
+		public ResourceCatalog ResourceCatalog { get => System.ResourceCatalog; }
+
 		public string Name { get; protected set; }
 
 		public bool Active { get; protected set; } = true;
