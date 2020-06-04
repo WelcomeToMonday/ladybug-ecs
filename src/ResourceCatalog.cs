@@ -18,8 +18,25 @@ namespace Ladybug.ECS
 			Content = contentManager;
 		}
 
-		public void LoadResource<T>(string identifier, string source)
+		public bool ResourceExists<T>(string identifier)
 		{
+			bool res = true;
+			
+			if (!Catalog.ContainsKey(typeof(T)))
+			{
+				res = false;
+			}
+			else
+			{
+				res = Catalog[typeof(T)].ContainsKey(identifier);
+			}
+
+			return res;
+		}
+
+		public T LoadResource<T>(string identifier, string source)
+		{
+			var res = default(T);
 			if (!Catalog.ContainsKey(typeof(T)))
 			{
 				Catalog[typeof(T)] = new Dictionary<string, object>();
@@ -27,10 +44,11 @@ namespace Ladybug.ECS
 
 			if (!Catalog[typeof(T)].ContainsKey(identifier))
 			{
-				var resource = Content.Load<T>(source);
+				res = Content.Load<T>(source);
 
-				Catalog[typeof(T)][identifier] = resource as object;
+				Catalog[typeof(T)][identifier] = res as object;
 			}
+			return res;
 		}
 
 		public T GetResource<T>(string name)
