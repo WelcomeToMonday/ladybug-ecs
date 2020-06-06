@@ -32,7 +32,7 @@ namespace Ladybug.ECS
 
 		public bool Active { get; set; } = true;
 
-		private List<Component> Components
+		public List<Component> Components
 		{
 			get
 			{
@@ -42,7 +42,7 @@ namespace Ladybug.ECS
 				}
 				return m_components;
 			}
-			set => m_components = value;
+			private set => m_components = value;
 		}
 
 		public void SetName(string name)
@@ -155,6 +155,15 @@ namespace Ladybug.ECS
 		public XmlSchema GetSchema()
 		{
 			return null;
+		}
+
+		public void Remove()
+		{
+			foreach (var component in Components)
+			{
+				System.DeregisterComponent(component);
+			}
+			System.DeregisterEntity(this);
 		}
 	}
 }

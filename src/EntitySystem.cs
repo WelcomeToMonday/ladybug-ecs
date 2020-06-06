@@ -143,7 +143,7 @@ namespace Ladybug.ECS
 			}
 		}
 
-		private void DeregisterEntity(Entity e)
+		internal void DeregisterEntity(Entity e)
 		{
 			_entityList.Remove((ulong)e.ID);
 		}
