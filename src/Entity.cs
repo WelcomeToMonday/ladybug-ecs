@@ -89,6 +89,17 @@ namespace Ladybug.ECS
 
 		// XML Serialization
 
+		public void InitializeComponents()
+		{
+			if (Components != null && Components.Count > 0)
+			{
+				foreach(var c in Components)
+				{
+					c.Initialize();
+				}
+			}
+		}
+
 		public void SaveToXml(string filePath)
 		{
 			XmlWriterSettings settings = new XmlWriterSettings { Indent = true };
