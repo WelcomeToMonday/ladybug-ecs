@@ -35,26 +35,32 @@ namespace Ladybug.ECS
 
 		public void InitializeComponents()
 		{
-			for (var i = 0; i < _componentList.Count; i++)
+			if (_componentList != null && _componentList.Count > 0)
 			{
-				var cList = _componentList.ElementAt(i).Value;
-				for (var j = 0; j < cList.Count; j++)
+				for (var i = 0; i < _componentList.Count; i++)
 				{
-					cList[j].Initialize();
+					var cList = _componentList.ElementAt(i).Value;
+					for (var j = 0; j < cList.Count; j++)
+					{
+						cList[j].Initialize();
+					}
 				}
 			}
 		}
 
 		public void PreUpdate(GameTime gameTime)
 		{
-			for (var i = 0; i < _componentList.Count; i++)
+			if (_componentList != null && _componentList.Count > 0)
 			{
-				var cList = _componentList.ElementAt(i).Value;
-				for (var j = 0; j < cList.Count; j++)
+				for (var i = 0; i < _componentList.Count; i++)
 				{
-					if (cList[j].Entity.Active && cList[j].Active)
+					var cList = _componentList.ElementAt(i).Value;
+					for (var j = 0; j < cList.Count; j++)
 					{
-						cList[j].PreUpdate(gameTime);
+						if (cList[j].Entity.Active && cList[j].Active)
+						{
+							cList[j].PreUpdate(gameTime);
+						}
 					}
 				}
 			}
@@ -62,14 +68,17 @@ namespace Ladybug.ECS
 
 		public void Update(GameTime gameTime)
 		{
-			for (var i = 0; i < _componentList.Count; i++)
+			if (_componentList != null && _componentList.Count > 0)
 			{
-				var cList = _componentList.ElementAt(i).Value;
-				for (var j = 0; j < cList.Count; j++)
+				for (var i = 0; i < _componentList.Count; i++)
 				{
-					if (cList[j].Entity.Active && cList[j].Active)
+					var cList = _componentList.ElementAt(i).Value;
+					for (var j = 0; j < cList.Count; j++)
 					{
-						cList[j].Update(gameTime);
+						if (cList[j].Entity.Active && cList[j].Active)
+						{
+							cList[j].Update(gameTime);
+						}
 					}
 				}
 			}
@@ -77,14 +86,17 @@ namespace Ladybug.ECS
 
 		public void PostUpdate(GameTime gameTime)
 		{
-			for (var i = 0; i < _componentList.Count; i++)
+			if (_componentList != null && _componentList.Count > 0)
 			{
-				var cList = _componentList.ElementAt(i).Value;
-				for (var j = 0; j < cList.Count; j++)
+				for (var i = 0; i < _componentList.Count; i++)
 				{
-					if (cList[j].Entity.Active && cList[j].Active)
+					var cList = _componentList.ElementAt(i).Value;
+					for (var j = 0; j < cList.Count; j++)
 					{
-						cList[j].PostUpdate(gameTime);
+						if (cList[j].Entity.Active && cList[j].Active)
+						{
+							cList[j].PostUpdate(gameTime);
+						}
 					}
 				}
 			}
@@ -92,11 +104,14 @@ namespace Ladybug.ECS
 
 		public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
-			for (var i = 0; i < _drawableComponents.Count; i++)
+			if (_drawableComponents != null && _drawableComponents.Count > 0)
 			{
-				if (_drawableComponents[i].Visible)
+				for (var i = 0; i < _drawableComponents.Count; i++)
 				{
-					_drawableComponents[i].Draw(gameTime, spriteBatch);
+					if (_drawableComponents[i].Visible)
+					{
+						_drawableComponents[i].Draw(gameTime, spriteBatch);
+					}
 				}
 			}
 		}
