@@ -18,6 +18,8 @@ namespace Ladybug.ECS
 			Content = contentManager;
 		}
 
+		public ContentManager ContentManager {get => Content;}
+
 		public bool ResourceExists<T>(string identifier)
 		{
 			bool res = true;
@@ -48,6 +50,11 @@ namespace Ladybug.ECS
 
 				Catalog[typeof(T)][identifier] = res as object;
 			}
+			else
+			{
+				res = GetResource<T>(identifier);
+			}
+
 			return res;
 		}
 
@@ -65,6 +72,19 @@ namespace Ladybug.ECS
 			}
 
 			return res;
+		}
+
+		public void SaveResource<T>(string identifier, T resource)
+		{
+			if (!Catalog.ContainsKey(typeof(T)))
+			{
+				Catalog[typeof(T)] = new Dictionary<string, object>();
+			}
+
+			if (!Catalog[typeof(T)].ContainsKey(identifier))
+			{
+				Catalog[typeof(T)][identifier] = resource;
+			}
 		}
 	}
 }
