@@ -171,7 +171,7 @@ namespace Ladybug.ECS
 			return id;
 		}
 
-		private void SortDrawableComponents()
+		public void SortDrawableComponents()
 		{
 			_drawableComponents.Sort(delegate (IDrawableComponent x, IDrawableComponent y)
 				{
