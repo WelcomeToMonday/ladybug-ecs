@@ -33,6 +33,22 @@ namespace Ladybug.ECS
 		public Entity FindEntity(string name)
 		=> _entityList.Where((item => item.Value.Name == name)).FirstOrDefault().Value;
 
+		public List<T> FindAllComponents<T>() where T : Component
+		{
+			List<T> res = null;
+
+			_entityList.Values.ToList().ForEach(e => 
+			{
+				var comp = e.GetComponent<T>();
+				if (comp != null)
+				{
+					res.Add(comp);
+				}
+			});
+
+			return res;
+		}
+
 		public void InitializeComponents()
 		{
 			if (_componentList != null && _componentList.Count > 0)
